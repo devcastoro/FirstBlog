@@ -21,8 +21,8 @@ class PostEntity
         }
         $this->title = $data['title'];
         $this->text = $data['text'];
-        $this->date = $data['date'];
-        $this->status = $data['status'];
+        $this->date = $data['data'];
+        $this->state = $data['state'];
     }
     public function getId() {
         return $this->id;
@@ -34,10 +34,10 @@ class PostEntity
         return $this->text;
     }
     public function getDate() {
-        return $this->date;
+        return $this->data;
     }
-    public function getStatus() {
-        return $this->status;
+    public function getState() {
+        return $this->state;
     }
 //    public function getShortDescription() {
 //        return substr($this->description, 0, 20);
