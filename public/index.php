@@ -48,7 +48,7 @@ $container['db'] = function ($c) {
 
 //Ottiene i post del blog
 $app->get('/', function (Request $request, Response $response) {
-    echo "home";
+    echo "home ddsds";
 });
 
 
