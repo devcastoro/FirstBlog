@@ -19,7 +19,7 @@ $config['addContentLengthHeader'] = false;
 $config['db']['host']   = "127.0.0.1";
 $config['db']['user']   = "root";
 $config['db']['pass']   = "";
-$config['db']['dbname'] = "ticket";
+$config['db']['dbname'] = "firstblog";
 
 //$app = new \Slim\App;
 $app = new \Slim\App(["settings" => $config]);
@@ -46,10 +46,45 @@ $container['db'] = function ($c) {
     return $pdo;
 };
 
-//Ottiene i post del blog
+
 $app->get('/', function (Request $request, Response $response) {
-    echo "home ddsds";
+    //Crea Home con Lista post in ordine decrescente
+    //$post_mapper = new PostMapper($this->db);
+    //Preleva dati e chiama view con struttura home.phtml
+
+    //Primo tentativo
+    echo "Container Homepage richiede dati a classe <br>";
+    $this->logger->addInfo("Home Container Caricato");
+
+    //Connessione effettiva al DB
+    $mapper = new PostMapper($this->db);
+
+    //Richiama la classe che "chiede" i dati al DB
+    $post = $mapper->getPosts();
+
+    //Invia i dati alla view che crea la struttura della pagina
+    $response = $this->view->render($response, "posts.phtml", ["posts" => $post, "router" => $this->router]);
+
+    //Mostra la pagina
+    return $response;
 });
+
+
+$app->get('/post/create', function (Request $request, Response $response) {
+    //Crea pagina creazione post e invia dati
+
+});
+
+$app->post('/post/{id}/update', function (Request $request, Response $response) {
+    //Invia dati form in DB. Funzione valida sia per nuovo post che per update
+
+});
+
+$app->get('/post/{id}', function (Request $request, Response $response) {
+    //Visualizza dati DB post
+    //Crea view posts.phtml
+});
+
 
 
 
