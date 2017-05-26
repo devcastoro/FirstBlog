@@ -2,31 +2,22 @@
 class PostMapper extends Mapper
 {
 
-//TEST CODICE STILE CORRETTO, ma non funzionante
-
-/*    public function getPosts()
+    public function getPosts()
     {
-
-//        $sql = "SELECT t.id, t.title, t.description, c.component
-//            from tickets t
-//            join components c on (c.id = t.component_id)";
-
-        $sql = "SELECT id, title, text, data, state  FROM post ORDER by id DESC";
+        $sql = "SELECT * from post ORDER by data DESC";
         $stmt = $this->db->query($sql);
 
         $results = [];
-        while ($row = $stmt->fetch()) {
-           $results[] = new PostEntity($row);
 
+        while ($row = $stmt->fetch()) {
+            $results[] = new PostEntity($row);
         }
         return $results;
 
     }
-    */
-
 
 //TEST FUNZIONANTE Stile non corretto
-    public function getPosts()
+/*    public function getPosts()
     {
 
         $link = @mysqli_connect("127.0.0.1", "root", "", "firstblog");
@@ -66,7 +57,7 @@ class PostMapper extends Mapper
         // chiusura della connessione
         @mysqli_close($link);
 
-    }
+    }*/
 }
 
 

@@ -18,6 +18,7 @@ class PostEntity
         // no id if we're creating
         if(isset($data['id'])) {
             $this->id = $data['id'];
+
         }
         $this->title = $data['title'];
         $this->text = $data['text'];
@@ -34,7 +35,7 @@ class PostEntity
         return $this->text;
     }
     public function getDate() {
-        return $this->data;
+        return $this->date;
     }
     public function getState() {
         return $this->state;

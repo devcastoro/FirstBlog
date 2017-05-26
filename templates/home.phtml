@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>FirstBlog</title>
+
+        <h1 style="margin-left: 50%;">FirstBlog</h1>
+        <h4 style="margin-left: 50%;">A Slimwork Experiment</h4>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+</head>
+
+<body>
+
+
+<p><a href="/post/create">Aggiungi Post</a></p>
+
+
+<?php
+    foreach($posts as $post):
+    ?>
+
+        <h3> <?=$post->getTitle() ?> </h3>
+        <p style="color:grey">Pubblicato il <?=$post->getDate() ?></p>
+        <div>
+            <form action="/">
+                <input type="checkbox" name="state" value="state" <?php $check = $post->getState(); if($check == 1) echo "checked"; ?>  />
+
+            </form>
+
+
+
+            <a href="">Modifica</a>
+            <a href="">Cancella</a>
+
+        </div>
+
+
+        <?php
+    endforeach;
+    ?>
+
+
+
+</body>
+</html>
+
