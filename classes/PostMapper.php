@@ -4,7 +4,7 @@ class PostMapper extends Mapper
 
     public function getPosts()
     {
-        $sql = "SELECT * from post ORDER by data DESC";
+        $sql = "SELECT * from post ORDER by datapost DESC";
         $stmt = $this->db->query($sql);
 
         $results = [];
@@ -12,52 +12,71 @@ class PostMapper extends Mapper
         while ($row = $stmt->fetch()) {
             $results[] = new PostEntity($row);
         }
+
         return $results;
 
     }
 
-//TEST FUNZIONANTE Stile non corretto
-/*    public function getPosts()
+
+    //pronto
+    public function getPostById($id)
     {
+        $sql = "SELECT * from post WHERE id == $id ";
+        $stmt = $this->db->query($sql);
 
-        $link = @mysqli_connect("127.0.0.1", "root", "", "firstblog");
+        $results = [];
 
-        if (mysqli_connect_errno()) {
-            echo "Connessione fallita: " . die (mysqli_connect_error());
+        while ($row = $stmt->fetch()) {
+            $results[] = new PostEntity($row);
         }
 
+        return $results;
 
-        // esecuzione della query
-        $query = "SELECT text FROM post ORDER by id DESC";
-        $result = @mysqli_query($link, $query);
+    }
+
+    public function getLastPostsID()
+    {
+        $sql = "SELECT id from post ORDER by id DESC LIMIT 1";
+        $stmt = $this->db->query($sql);
+
+        $results[] =$stmt->fetch();
+
+        $lastPostId = $results[0]['id'];
+
+        return $lastPostId;
+
+    }
+
+    public function save(PostEntity $post) {
+        $sql = "insert into post (id, title, text, state, datapost) values (:id, :title, :text, :state, :datapost)";
+        $stmt = $this->db->prepare($sql);
 
 
-        // controllo sul numero dei record coinvolti
-        if (@mysqli_num_rows($result) != 0) {
-            // risultato sotto forma di array numerico
-            while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-                echo $row[0] . "<br>";
-            }
+        $result = $stmt->execute([
+            "id" => $post->getId(),
+            "title" => $post->getTitle(),
+            "text" => $post->getText(),
+            "state" => $post->getState(),
+            "datapost" => $post->getDatapost(),
+        ]);
 
-//            // risultato sotto forma di array asscociativo
-//            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-//                echo $row['text'] . "<br>";
-//            }
-//
-//            // risultato sotto forma di array numerico o associativo
-//            while ($row = mysqli_fetch_array($result, MYSQLI_BOTH)) {
-//                echo $row['id'] . "<br>";
-//                echo $row[0] . "<br>";
-//            }
-        }
 
-        // liberazione della memoria dal risultato della query
-        @mysqli_free_result($result);
+//        $sql = "insert into tickets
+//            (title, description, component_id) values
+//            (:title, :description,
+//            (select id from components where component = :component))";
+//        $stmt = $this->db->prepare($sql);
+//        $result = $stmt->execute([
+//            "title" => $ticket->getTitle(),
+//            "description" => $ticket->getDescription(),
+//            "component" => $ticket->getComponent(),
+//        ]);
+//        if(!$result) {
+//            throw new Exception("could not save record");
+//        }
 
-        // chiusura della connessione
-        @mysqli_close($link);
 
-    }*/
+    }
 }
 
 

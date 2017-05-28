@@ -14,4 +14,5 @@
     "monolog/monolog": "1.21.0",
     "slim/php-view": "2.2.0"
   }
+
 }

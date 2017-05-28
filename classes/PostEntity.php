@@ -5,8 +5,8 @@ class PostEntity
     protected $title;
     protected $text;
 
-    protected $date;
-    protected $status;
+    protected $datapost;
+    protected $state;
 
     /**
      * Accept an array of data matching properties of this class
@@ -18,11 +18,10 @@ class PostEntity
         // no id if we're creating
         if(isset($data['id'])) {
             $this->id = $data['id'];
-
         }
         $this->title = $data['title'];
         $this->text = $data['text'];
-        $this->date = $data['data'];
+        $this->datapost = $data['datapost'];
         $this->state = $data['state'];
     }
     public function getId() {
@@ -34,8 +33,8 @@ class PostEntity
     public function getText() {
         return $this->text;
     }
-    public function getDate() {
-        return $this->date;
+    public function getDatapost() {
+        return $this->datapost;
     }
     public function getState() {
         return $this->state;

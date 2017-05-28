@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>FirstBlog</title>
+
+    <h1 style="margin-left: 50%;">FirstBlog</h1>
+    <h4 style="margin-left: 50%;">A Slimwork Experiment</h4>
+
+
+</head>
+<body>
+
+<?php
+foreach($posts as $post):
+    ?>
+
+    <h2> <?=$post->getTitle() ?> </h2> <p style="color:grey">Pubblicato il <?=$post->getDate() ?></p>
+    <div> $post->getText();     </div>
+
+
+    <?php
+endforeach;
+?>
+
+<a href="/">Indietro</a>
+
+
+</body>
+</html>
+
