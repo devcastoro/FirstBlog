@@ -55,7 +55,7 @@ $container['db'] = function ($c) {
 
 
 
-//Homepage
+//Homepage - OK
 $app->get('/', function (Request $request, Response $response) {
 
 
@@ -75,7 +75,7 @@ $app->get('/', function (Request $request, Response $response) {
 });
 
 
-//Route Pagina Nuovo Post
+//Route Pagina Nuovo Post - OK
 $app->get('/post/create', function (Request $request, Response $response) {
 
     $this->logger->addInfo("Genero Pagina Creazione Post");
@@ -97,28 +97,19 @@ $app->post('/post/create', function (Request $request, Response $response) {
 
     $this->logger->addInfo("Invio dati nuovo Post al server");
 
-
-
     $data = $request->getParsedBody();
     $post_data = [];
     $post_data['id'] = filter_var($data['id'], FILTER_SANITIZE_STRING);
     $post_data['title'] = filter_var($data['title'], FILTER_SANITIZE_STRING);
     $post_data['text'] = filter_var($data['text'], FILTER_SANITIZE_STRING);
-
-//Controllo sullo stato
-    if ($_POST['state'] == 'state'){$postState = 1;}
-    else {$postState = 0;}
+    //Controllo sullo stato checkbox
+    if ($_POST['state'] == 'state')
+        {$postState = 1;}
+    else
+        {$postState = 0;}
     $post_data['state'] = $postState;
+    $post_data['datapost'] =  date('Y-m-d h:i:s');
 
-    $post_data['datapost'] =  date_default_timezone_get();
-
-    // work out the component
-
-//    $component_id = (int)$data['component'];
-//    $component_mapper = new ComponentMapper($this->db);
-//    $component = $component_mapper->getComponentById($component_id);
-
-   // $post_data['component'] = $component->getName();
     $post = new postEntity($post_data);
     $post_mapper = new postMapper($this->db);
     $post_mapper->save($post);
@@ -128,50 +119,114 @@ $app->post('/post/create', function (Request $request, Response $response) {
     return $response;
 });
 
-$app->post('/post/delete', function (Request $request, Response $response) {
+//Modifica Post - Working ON
+$app->get('/post/{id}/update', function (Request $request, Response $response, $args) {
+
+    $this->logger->addInfo("Genero Pagina Modifica Post");
+
+    $post_id = (int)$args['id'];
+
+    //Connessione effettiva al DB
+    $mapper = new PostMapper($this->db);
+
+    //Richiama la classe che "chiede" i dati al DB
+    $post = $mapper->getPostById($post_id);
+
+
+    $response = $this->view->render($response, "postedit.phtml", ["post" =>$post, "router" => $this->router]);
+    return $response;
+
+
+});
+$app->post('/post/{id}/update', function (Request $request, Response $response) {
+
+    $this->logger->addInfo("Invio dati  Post modificato al server");
+
+
+    $data = $request->getParsedBody();
+
+    $post_data = [];
+    $post_data['id'] = filter_var($data['id'], FILTER_SANITIZE_STRING);
+    $post_data['title'] = filter_var($data['title'], FILTER_SANITIZE_STRING);
+    $post_data['text'] = filter_var($data['text'], FILTER_SANITIZE_STRING);
+    //Controllo sullo stato checkbox
+    if ($_POST['state'] == 'state')
+    {$postState = 1;}
+    else {$postState = 0;}
+    $post_data['state'] = $postState;
+    $post_data['datapost'] =  date('Y-m-d h:i:s');
+
+    $post = new postEntity($post_data);
+    $post_mapper = new postMapper($this->db);
+
+    $post_mapper->update($post);
+    $response = $response->withRedirect("/");
+
+
+    return $response;
+});
+
+$app->get('/post/{id}/delete', function (Request $request, Response $response, $args) {
 
     $this->logger->addInfo("Cancellazione Post");
+    $post_id = (int)$args['id'];
+
+    //Connessione effettiva al DB
+    $mapper = new PostMapper($this->db);
+
+    //Richiama la classe che "chiede" i dati al DB
+    $post = $mapper->getPostById($post_id);
 
 
-
-//    $data = $request->getParsedBody();
-//    $ticket_data = [];
-//    $ticket_data['title'] = filter_var($data['title'], FILTER_SANITIZE_STRING);
-//    $ticket_data['text'] = filter_var($data['text'], FILTER_SANITIZE_STRING);
-//    $ticket_data['state'] = $data['description'] //isset($_POST['state'])
-//    $ticket_data['date'] =  //date_default_timezone_get();
-//
-//    // work out the component
-//    $component_id = (int)$data['component'];
-//    $component_mapper = new ComponentMapper($this->db);
-//    $component = $component_mapper->getComponentById($component_id);
-//    $ticket_data['component'] = $component->getName();
-//    $ticket = new TicketEntity($ticket_data);
-//    $ticket_mapper = new TicketMapper($this->db);
-//    $ticket_mapper->save($ticket);
-//    $response = $response->withRedirect("/");
-//    return $response;
-});
-
-$app->post('/post/{id}/update', function (Request $request, Response $response) {
-    //Invia dati form in DB. Funzione valida sia per nuovo post che per update
-    $this->logger->addInfo("Invio dati modifica Post al server");
+    $response = $this->view->render($response, "postdelete.phtml", ["post" =>$post, "router" => $this->router]);
+    return $response;
 
 });
+$app->post('/post/{id}/delete', function (Request $request, Response $response) {
 
-$app->get('/post/{id}', function (Request $request, Response $response, $args) {
+    $this->logger->addInfo("Invio dati  Post cancellato al server");
+
+    $data = $request->getParsedBody();
+
+//    print_r($data);
+
+    $post_data = [];
+    $post_data['id'] = filter_var($data['id'], FILTER_SANITIZE_STRING);
+    $post_data['title'] = filter_var($data['title'], FILTER_SANITIZE_STRING);
+    $post_data['text'] = filter_var($data['text'], FILTER_SANITIZE_STRING);
+    //Controllo sullo stato checkbox
+    if ($_POST['state'] == 'state')
+    {$postState = 1;}
+    else {$postState = 0;}
+    $post_data['state'] = $postState;
+    $post_data['datapost'] =  date('Y-m-d h:i:s');
+
+    $post = new postEntity($post_data);
+    $post_mapper = new postMapper($this->db);
+
+    $post_mapper->delete($post);
+    $response = $response->withRedirect("/");
+
+
+    return $response;
+});
+
+
+
+$app->get('/posts/{id}', function (Request $request, Response $response, $args) {
     //Visualizza dati DB post
     //Crea view home.phtml
     $this->logger->addInfo("Visualizzo dati specifico Post");
 
-   // $id = $request->getAttribute( 'id');
-
     $post_id = (int)$args['id'];
+
     $mapper = new PostMapper($this->db);
     $post = $mapper->getPostById($post_id);
-    $response = $this->view->render($response, "postdetail.phtml", ["post" => $post]);
+
+
+    $response = $this->view->render($response, "postdetail.phtml", ["post" =>$post, "router" => $this->router]);
     return $response;
-})->setName('post-detail');
+});
 
 
 

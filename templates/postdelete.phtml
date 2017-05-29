@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>FirstBlog</title>
+
+    <a href="/"><h1 style="margin-left: 50%;">FirstBlog</h1></a>
+    <h4 style="margin-left: 50%;">A Slimwork Experiment</h4>
+
+</head>
+<body>
+
+<h3> Cancella post Post </h3>
+
+<div style="width:90%; margin-left:2%; ">
+    <form method="post" action="/post/<?=$post->getId() ?>/delete">
+        ID:<input type="number" name="id" value="<?=$post->getId() ?>" readonly /><br>
+        <input type="text" name="title" placeholder="Titolo" style="width:50%;  " value="<?=$post->getTitle() ?>" readonly /><br>
+        <textarea name="text" placeholder="Testo" style="width:80%; height:150px; " readonly><?=$post->getText() ?></textarea><br>
+        <div>
+            Pubblico: <input type="checkbox" name="state" value="state"  <?php $check = $post->getState(); if($check == 1) echo "checked";  ?> readonly />
+        </div>
+        <input type="submit" value="Cancella Articolo" />
+
+    </form>
+</div>
+
+
+
+</body>
+</html>

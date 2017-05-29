@@ -17,22 +17,21 @@ class PostMapper extends Mapper
 
     }
 
-
-    //pronto
-    public function getPostById($id)
-    {
-        $sql = "SELECT * from post WHERE id == $id ";
-        $stmt = $this->db->query($sql);
-
-        $results = [];
-
-        while ($row = $stmt->fetch()) {
-            $results[] = new PostEntity($row);
+    /**
+     * Get one ticket by its ID
+     *
+     * @param int $post_id The ID of the post
+     * @return PostEntity The post
+     */
+    public function getPostById($post_id) {
+        $sql = "SELECT * from post where post.id = :post_id";
+        $stmt = $this->db->prepare($sql);
+        $result = $stmt->execute(["post_id" => $post_id]);
+        if($result) {
+            return new PostEntity($stmt->fetch());
         }
-
-        return $results;
-
     }
+
 
     public function getLastPostsID()
     {
@@ -47,7 +46,8 @@ class PostMapper extends Mapper
 
     }
 
-    public function save(PostEntity $post) {
+    public function save(PostEntity $post)
+    {
         $sql = "insert into post (id, title, text, state, datapost) values (:id, :title, :text, :state, :datapost)";
         $stmt = $this->db->prepare($sql);
 
@@ -59,24 +59,34 @@ class PostMapper extends Mapper
             "state" => $post->getState(),
             "datapost" => $post->getDatapost(),
         ]);
+    }
+
+    public function update(PostEntity $post)
+    {
+        $sql = "UPDATE post SET title = :title, text = :text, state = :state, datapost = :datapost  WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
 
 
-//        $sql = "insert into tickets
-//            (title, description, component_id) values
-//            (:title, :description,
-//            (select id from components where component = :component))";
-//        $stmt = $this->db->prepare($sql);
-//        $result = $stmt->execute([
-//            "title" => $ticket->getTitle(),
-//            "description" => $ticket->getDescription(),
-//            "component" => $ticket->getComponent(),
-//        ]);
-//        if(!$result) {
-//            throw new Exception("could not save record");
-//        }
-
+        $result = $stmt->execute([
+            "id" => $post->getId(),
+            "title" => $post->getTitle(),
+            "text" => $post->getText(),
+            "state" => $post->getState(),
+            "datapost" => $post->getDatapost(),
+        ]);
 
     }
+    public function delete(PostEntity $post)
+    {
+        $sql = "DELETE FROM post WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+
+        $result = $stmt->execute([
+            "id" => $post->getId(),
+        ]);
+    }
+
 }
 
 

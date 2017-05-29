@@ -9,19 +9,16 @@
 </head>
 <body>
 
-<?php
-foreach($posts as $post):
-    ?>
-
-    <h2> <?=$post->getTitle() ?> </h2> <p style="color:grey">Pubblicato il <?=$post->getDate() ?></p>
-    <div> $post->getText();     </div>
 
 
-    <?php
-endforeach;
-?>
+    <h2> <?=$post->getTitle() ?> </h2>
+    <p style="color:grey">Pubblicato il <?=$post->getDatapost() ?></p>
+    <div> <?=$post->getText() ?>     </div>
 
-<a href="/">Indietro</a>
+
+
+
+<a href="/" style="margin-left:50%">Indietro</a>
 
 
 </body>
