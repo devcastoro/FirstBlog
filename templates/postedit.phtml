@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>FirstBlog</title>
+
+    <a href="/"><h1 style="margin-left: 50%;">FirstBlog</h1></a>
+    <h4 style="margin-left: 50%;">A Slimwork Experiment</h4>
+
+</head>
+<body>
+
+<h3> Modifica Post </h3>
+
+<div style="width:90%; margin-left:2%; ">
+    <form method="post" action="/post/<?=$post->getId() ?>/update">
+        <input type="number" name="id" hidden value="<?=$post->getId() ?>" />
+        <input type="text" name="title" placeholder="Titolo" style="width:50%;  " value="<?=$post->getTitle() ?>" /><br>
+        <textarea name="text" placeholder="Testo" style="width:80%; height:150px; "><?=$post->getText() ?></textarea><br>
+        <div>
+            Pubblico: <input type="checkbox" name="state" value="state"  <?php $check = $post->getState(); if($check == 1) echo "checked";  ?>  />
+        </div>
+        <input type="submit" value="Modifica Articolo" />
+
+    </form>
+</div>
+
+
+
+</body>
+</html>
