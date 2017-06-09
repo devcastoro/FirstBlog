@@ -4,27 +4,18 @@ class PostMapper extends Mapper
 
     public function getPosts()
     {
-        $sql = "SELECT * from post ORDER by datapost DESC";
+        $sql = "SELECT * FROM posts ORDER BY datapost DESC";
         $stmt = $this->db->query($sql);
-
         $results = [];
-
         while ($row = $stmt->fetch()) {
             $results[] = new PostEntity($row);
         }
-
         return $results;
 
     }
 
-    /**
-     * Get one ticket by its ID
-     *
-     * @param int $post_id The ID of the post
-     * @return PostEntity The post
-     */
     public function getPostById($post_id) {
-        $sql = "SELECT * from post where post.id = :post_id";
+        $sql = "SELECT * FROM posts WHERE posts.id = :post_id";
         $stmt = $this->db->prepare($sql);
         $result = $stmt->execute(["post_id" => $post_id]);
         if($result) {
@@ -35,22 +26,22 @@ class PostMapper extends Mapper
 
     public function getLastPostsID()
     {
-        $sql = "SELECT id from post ORDER by id DESC LIMIT 1";
+        $sql = "SELECT id FROM posts ORDER BY id DESC LIMIT 1";
         $stmt = $this->db->query($sql);
-
         $results[] =$stmt->fetch();
 
-        $lastPostId = $results[0]['id'];
+        if (!isset($results[0])) {
+            return null;
+        }
 
-        return $lastPostId;
+        return $lastPostId = $results[0]['id'];
 
     }
 
     public function save(PostEntity $post)
     {
-        $sql = "insert into post (id, title, text, state, datapost) values (:id, :title, :text, :state, :datapost)";
+        $sql = "INSERT INTO posts (id, title, text, state, datapost) VALUES (:id, :title, :text, :state, :datapost)";
         $stmt = $this->db->prepare($sql);
-
 
         $result = $stmt->execute([
             "id" => $post->getId(),
@@ -63,10 +54,9 @@ class PostMapper extends Mapper
 
     public function update(PostEntity $post)
     {
-        $sql = "UPDATE post SET title = :title, text = :text, state = :state, datapost = :datapost  WHERE id = :id";
+        $sql = "UPDATE posts SET title = :title, text = :text, state = :state, datapost = :datapost  WHERE id = :id";
 
         $stmt = $this->db->prepare($sql);
-
 
         $result = $stmt->execute([
             "id" => $post->getId(),
@@ -79,7 +69,7 @@ class PostMapper extends Mapper
     }
     public function delete(PostEntity $post)
     {
-        $sql = "DELETE FROM post WHERE id = :id";
+        $sql = "DELETE FROM posts WHERE id = :id";
         $stmt = $this->db->prepare($sql);
 
         $result = $stmt->execute([

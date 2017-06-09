@@ -1,41 +1,29 @@
 <html>
-<head>
-    <title>FirstBlog</title>
-
-        <a href="/"><h1 style="margin-left: 50%;">FirstBlog</h1></a>
-        <h4 style="margin-left: 50%;">A Slimwork Experiment</h4>
-
-
-</head>
-
-<body>
-
-
-<p><a href="/post/create">Aggiungi Post</a></p>
-
-
-<?php
-    foreach($posts as $post):
-    ?>
-
-        <a href="/posts/<?=$post->getId() ?>"><h3> <?=$post->getTitle() ?> </h3></a>
-        <p style="color:grey">Pubblicato il <?=$post->getDatapost() ?></p>
-        <div>
-            <form action="/">
-                <input type="checkbox" name="state" value="state" <?php $check = $post->getState(); if($check == 1) echo "checked";  ?> disabled  />
-
-            </form><a href="/post/<?=$post->getId() ?>/update">Modifica</a> <a href="/post/<?=$post->getId() ?>/delete">Cancella</a>
-
-
-        </div>
-
+    <head>
+        <title>FirstBlog</title>
+            <a href="/"><h1 style="margin-left: 50%;">FirstBlog</h1></a>
+            <h4 style="margin-left: 50%;">A Slimwork Experiment</h4>
+    </head>
+    <body>
+        <p><a href="/post/create">Aggiungi Post</a></p>
 
         <?php
-    endforeach;
-    ?>
+            foreach($posts as $post):
+        ?>
 
+            <a href="/posts/<?=$post->getId() ?>"><h3> <?=$post->getTitle() ?> </h3></a>
 
+            <p style="color:grey">Pubblicato il <?=$post->getDatapost() ?></p>
+            <div>
+                <form action="/">
+                    <input type="checkbox" name="state" value="state" <?php $check = $post->getState(); if($check == 1) echo "checked";  ?> disabled  />
+                </form><a href="/post/<?=$post->getId() ?>/update">Modifica</a> <a href="/post/<?=$post->getId() ?>/delete">Cancella</a>
+            </div>
 
-</body>
+        <?php
+            endforeach;
+        ?>
+
+    </body>
 </html>
 

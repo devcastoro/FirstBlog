@@ -4,25 +4,21 @@
 
         <a href="/"><h1 style="margin-left: 50%;">FirstBlog</h1></a>
         <h4 style="margin-left: 50%;">A Slimwork Experiment</h4>
+
     </head>
     <body>
+        <h3> Nuovo Post </h3>
 
-    <h3> Nuovo Post </h3>
-
-    <div style="width:90%; margin-left:2%; ">
-        <form method="post" action="/post/create">
-            <input type="number" name="id" hidden value="<?=$lastPostId+1 ?>" />
-            <input type="text" name="title" placeholder="Titolo" style="width:50%;  " /><br>
-            <textarea name="text" placeholder="Testo" style="width:80%; height:150px; "></textarea><br>
-            <div>
-                Pubblico: <input type="checkbox" name="state" value="state" />
-            </div>
-            <input type="submit" value="Invia Articolo" />
-
-        </form>
-    </div>
-
-
-
+        <div style="width:90%; margin-left:2%; ">
+            <form method="post" action="/post/create">
+                <input type="number" name="id" hidden value="<?=$lastPostId+1 ?>" />
+                <input type="text" name="title" placeholder="Titolo" style="width:50%;  " /><br>
+                <textarea name="text" placeholder="Testo" style="width:80%; height:150px; "></textarea><br>
+                <div>
+                    Pubblico: <input type="checkbox" name="state" value="state" />
+                </div>
+                <button type="submit">Invia Articolo</button>
+            </form>
+        </div>
     </body>
 </html>

@@ -1,26 +1,19 @@
 <html>
-<head>
-    <title>FirstBlog</title>
+    <head>
+        <title>FirstBlog</title>
 
-    <h1 style="margin-left: 50%;">FirstBlog</h1>
-    <h4 style="margin-left: 50%;">A Slimwork Experiment</h4>
+        <h1 style="margin-left: 50%;">FirstBlog</h1>
+        <h4 style="margin-left: 50%;">A Slimwork Experiment</h4>
 
+    </head>
+    <body>
 
-</head>
-<body>
+        <h2> <?=$post->getTitle() ?> </h2>
+        <p style="color:grey"> Pubblicato il <?=$post->getDatapost() ?> </p>
+        <div> <?=$post->getText() ?> </div>
 
+        <a href="/" style="margin-left:50%">Indietro</a>
 
-
-    <h2> <?=$post->getTitle() ?> </h2>
-    <p style="color:grey">Pubblicato il <?=$post->getDatapost() ?></p>
-    <div> <?=$post->getText() ?>     </div>
-
-
-
-
-<a href="/" style="margin-left:50%">Indietro</a>
-
-
-</body>
+    </body>
 </html>
 
