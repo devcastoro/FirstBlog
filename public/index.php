@@ -78,7 +78,7 @@ $app->get('/post/create', function (Request $request, Response $response) {
     }
 
     // Send post data to VIEW that create the page
-    $response = $this->view->render($response, "postadd.phtml", ["lastPostId" => $lastPostId, "router" => $this->router]);
+    $response = $this->view->render($response, "postadd.phtml", ["lastPostId" => $lastPostId]);
     return $response;
 
 });
@@ -101,7 +101,7 @@ $app->post('/post/create', function (Request $request, Response $response) {
     // Checkbox State control
     $postState = $_POST['state'] == 'state' ? 1 : 0;
     $post_data['state'] = filter_var($postState, FILTER_SANITIZE_STRING);
-    $post_data['datapost'] =  date('Y-m-d h:i:s');
+    $post_data['datapost'] =  date('Y-m-d H:i:s');
 
     // Transform Array in a Post Entity
     $postEntity = new PostEntity($post_data);
@@ -128,7 +128,7 @@ $app->get('/post/{id}/update', function (Request $request, Response $response, $
     $post = $mapper->getPostById($post_id);
 
     // Send post data to VIEW that create the page
-    $response = $this->view->render($response, "postedit.phtml", ["post" =>$post, "router" => $this->router]);
+    $response = $this->view->render($response, "postedit.phtml", ["post" =>$post]);
     return $response;
 });
 
@@ -150,7 +150,7 @@ $app->post('/post/{id}/update', function (Request $request, Response $response) 
     // Checkbox state control
     $postState = $_POST['state'] == 'state' ? 1 : 0;
     $post_data['state'] = filter_var($postState, FILTER_SANITIZE_STRING);
-    $post_data['datapost'] =  date('Y-m-d h:i:s');
+    $post_data['datapost'] =  date('Y-m-d H:i:s');
 
     // Transform Array in a Post Entity
     $post = new postEntity($post_data);
@@ -177,7 +177,7 @@ $app->get('/post/{id}/delete', function (Request $request, Response $response, $
     $post = $mapper->getPostById($post_id);
 
     // Send post data to VIEW that create the page
-    $response = $this->view->render($response, "postdelete.phtml", ["post" =>$post, "router" => $this->router]);
+    $response = $this->view->render($response, "postdelete.phtml", ["post" =>$post]);
     return $response;
 
 });
@@ -200,7 +200,7 @@ $app->post('/post/{id}/delete', function (Request $request, Response $response) 
     // Checkbox state control
     $postState = $_POST['state'] == 'state' ? 1 : 0;
     $post_data['state'] = filter_var($postState, FILTER_SANITIZE_STRING);
-    $post_data['datapost'] =  date('Y-m-d h:i:s');
+    $post_data['datapost'] =  date('Y-m-d H:i:s');
 
     // Transform Array in a Post Entity
     $post = new postEntity($post_data);
@@ -227,9 +227,9 @@ $app->get('/posts/{id}', function (Request $request, Response $response, $args) 
     $post = $mapper->getPostById($post_id);
 
     // Send post data to VIEW that create the page
-    $response = $this->view->render($response, "postdetail.phtml", ["post" =>$post, "router" => $this->router]);
+    $response = $this->view->render($response, "postdetail.phtml", ["post" =>$post]);
     return $response;
-});
+})->setName('postD');
 
 //Run the app
 $app->run();
