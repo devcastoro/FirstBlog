@@ -4,8 +4,39 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fe8719044d42c596b1d294f80e9c696",
+    "content-hash": "c172ae1cb5673cf5b21a733e038c8f3a",
     "packages": [
+        {
+            "name": "container-interop/container-interop",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/container-interop/container-interop.git",
+                "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/container-interop/container-interop/zipball/79cbf1341c22ec75643d841642dd5d6acd83bdb8",
+                "reference": "79cbf1341c22ec75643d841642dd5d6acd83bdb8",
+                "shasum": ""
+            },
+            "require": {
+                "psr/container": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Interop\\Container\\": "src/Interop/Container/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
+            "homepage": "https://github.com/container-interop/container-interop",
+            "time": "2017-02-14T19:40:03+00:00"
+        },
         {
             "name": "monolog/monolog",
             "version": "1.21.0",
@@ -133,12 +164,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "93ec38f1df4d4ad3f0c71bc9273139fa8af29f3e"
+                "reference": "2af86acb99d69fda50fe441cc45574d70c6267b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/93ec38f1df4d4ad3f0c71bc9273139fa8af29f3e",
-                "reference": "93ec38f1df4d4ad3f0c71bc9273139fa8af29f3e",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/2af86acb99d69fda50fe441cc45574d70c6267b8",
+                "reference": "2af86acb99d69fda50fe441cc45574d70c6267b8",
                 "shasum": ""
             },
             "require": {
@@ -174,7 +205,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2017-03-24 14:13:45"
+            "time": "2017-06-04 15:04:52"
         },
         {
             "name": "psr/container",
@@ -323,67 +354,6 @@
             "time": "2016-10-10 12:19:37"
         },
         {
-            "name": "slim/http",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/slimphp/Slim-Http.git",
-                "reference": "7ad25147bc5d9989ca14c53c4b291599d06adab9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim-Http/zipball/7ad25147bc5d9989ca14c53c4b291599d06adab9",
-                "reference": "7ad25147bc5d9989ca14c53c4b291599d06adab9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6",
-                "psr/http-message": "^1.0"
-            },
-            "conflict": {
-                "slim/slim": "^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^5.7|^6.0",
-                "squizlabs/php_codesniffer": "^2.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Slim\\Http\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Allen",
-                    "email": "rob@akrabat.com",
-                    "homepage": "http://akrabat.com"
-                },
-                {
-                    "name": "Josh Lockhart",
-                    "email": "hello@joshlockhart.com",
-                    "homepage": "http://joshlockhart.com"
-                },
-                {
-                    "name": "Andrew Smith",
-                    "email": "a.smith@silentworks.co.uk",
-                    "homepage": "http://silentworks.co.uk"
-                }
-            ],
-            "description": "Slim's PSR-7 implementation",
-            "homepage": "http://slimframework.com",
-            "keywords": [
-                "http",
-                "psr-7",
-                "psr7"
-            ],
-            "time": "2017-05-14 09:16:39"
-        },
-        {
             "name": "slim/php-view",
             "version": "2.2.0",
             "source": {
@@ -434,31 +404,31 @@
         },
         {
             "name": "slim/slim",
-            "version": "4.x-dev",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "72eea92845b090ce8c8f56702a571bbbf7fdb01f"
+                "reference": "2f189b2b2965c924bf9410d193b4023a1c5fce9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/72eea92845b090ce8c8f56702a571bbbf7fdb01f",
-                "reference": "72eea92845b090ce8c8f56702a571bbbf7fdb01f",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/2f189b2b2965c924bf9410d193b4023a1c5fce9c",
+                "reference": "2f189b2b2965c924bf9410d193b4023a1c5fce9c",
                 "shasum": ""
             },
             "require": {
+                "container-interop/container-interop": "^1.2",
                 "nikic/fast-route": "^1.0",
-                "php": ">=5.6.0",
+                "php": ">=5.5.0",
                 "pimple/pimple": "^3.0",
                 "psr/container": "^1.0",
-                "psr/http-message": "^1.0",
-                "slim/http": ">=0.2"
+                "psr/http-message": "^1.0"
             },
             "provide": {
                 "psr/http-message-implementation": "1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7|^6.0",
+                "phpunit/phpunit": "^4.0",
                 "squizlabs/php_codesniffer": "^2.5"
             },
             "type": "library",
@@ -501,15 +471,13 @@
                 "micro",
                 "router"
             ],
-            "time": "2017-05-17 08:13:05"
+            "time": "2017-05-13 14:31:48"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "slim/slim": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
