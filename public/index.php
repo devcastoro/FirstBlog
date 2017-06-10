@@ -4,13 +4,13 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 
 
 
 //NameSpace
 spl_autoload_register(function ($classname) {
-    require ("../classes/" . $classname . ".php");
+    require ("classes/" . $classname . ".php");
 });
 
 //Parametri di sviluppo
@@ -40,9 +40,7 @@ $container['logger'] = function($c) {
 $container['db'] = function ($c) {
     $db = $c['settings']['db'];
 
-//   $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'], $db['user'], $config['pass']);
-
-    $pdo = new PDO('mysql:host=127.0.0.1;dbname=firstblog', 'root', '');
+    $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'], $db['user'], $db['pass']);
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
