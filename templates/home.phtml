@@ -7,11 +7,13 @@
     <body>
         <p><a href="/post/create">Aggiungi Post</a></p>
 
+
+
         <?php
             foreach($posts as $post):
         ?>
 
-            <a href="/posts/<?=$post->getId() ?>"><h3> <?=$post->getTitle() ?> </h3></a>
+            <a href="<?=$router->pathFor('post-detail', ['id' => $post->getId()])?>"><h3> <?=$post->getTitle() ?> </h3></a>
 
             <p style="color:grey">Pubblicato il <?=$post->getDatapost() ?></p>
 
@@ -21,10 +23,10 @@
                 </form><a href="/post/<?=$post->getId() ?>/update">Modifica</a> <a href="/post/<?=$post->getId() ?>/delete">Cancella</a>
             </div>
 
-
-
         <?php
             endforeach;
+
+
         ?>
 
     </body>

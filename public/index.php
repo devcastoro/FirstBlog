@@ -12,6 +12,7 @@ spl_autoload_register(function ($classname){
 
 // Development Parameters
 $config['displayErrorDetails'] = true;
+
 $config['db']['host']   = "127.0.0.1";
 $config['db']['user']   = "root";
 $config['db']['pass']   = "";
@@ -32,11 +33,9 @@ $container['logger'] = function($c){
 
 // DB Connection
 $container['db'] = function ($c){
-//    $db = $c['settings']['db'];
-//    var_dump($db);
+    $db = $c['settings']['db'];
 
-  //  $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'], $db['user'], $db['pass']);
-    $pdo = new PDO('mysql:host=127.0.0.1;dbname=firstblog', 'root', '');
+    $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'], $db['user'], $db['pass']);
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
@@ -229,7 +228,8 @@ $app->get('/posts/{id}', function (Request $request, Response $response, $args) 
     // Send post data to VIEW that create the page
     $response = $this->view->render($response, "postdetail.phtml", ["post" =>$post]);
     return $response;
-})->setName('postD');
+})->setName('post-detail');
 
 //Run the app
 $app->run();
+
