@@ -5,7 +5,7 @@ services:
   slim-example:
     image: comicrelief/php7-slim:latest
     volumes:
-      - ~/slim-example:/var/www/html
+      - ~/Firstblog:/var/www/html
     ports:
       - "9001:80"
     depends_on:
@@ -16,7 +16,7 @@ services:
   slim-example-mysql:
     image: mysql:5
     volumes:
-      - ~/slim-example/.data:/var/lib/mysql
+      - ~/Firstblog/.data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
