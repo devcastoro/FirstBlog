@@ -13,9 +13,9 @@ spl_autoload_register(function ($classname){
 // Development Parameters
 $config['displayErrorDetails'] = true;
 
-$config['db']['host']   = "127.0.0.1";
+$config['db']['host']   = "192.168.99.100";
 $config['db']['user']   = "root";
-$config['db']['pass']   = "";
+$config['db']['pass']   = "pwd";
 $config['db']['dbname'] = "firstblog";
 
 // App Initialization (Container/Views)
