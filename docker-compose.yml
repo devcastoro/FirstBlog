@@ -2,18 +2,18 @@ version: '2'
 
 services:
 
-  slim-example:
+  slim:
     image: comicrelief/php7-slim:latest
     volumes:
       - .:/var/www/html
     ports:
       - "9001:80"
     depends_on:
-      - slim-example-mysql
+      - mysql
     environment:
       APPLICATION_ENV: local
 
-  slim-example-mysql:
+  mysql:
     image: mysql:5
     volumes:
       - ./.data:/var/lib/mysql
