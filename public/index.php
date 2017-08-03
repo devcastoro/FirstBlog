@@ -13,7 +13,7 @@ spl_autoload_register(function ($classname){
 // Development Parameters
 $config['displayErrorDetails'] = true;
 
-$config['db']['host']   = "192.168.99.100";
+$config['db']['host']   = "mysql";
 $config['db']['user']   = "root";
 $config['db']['pass']   = "pwd";
 $config['db']['dbname'] = "firstblog";
