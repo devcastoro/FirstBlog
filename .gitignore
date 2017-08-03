@@ -1,7 +1,4 @@
 composer.phar
-vendor/*
+vendor
 .idea
-.logs
-logs
-
-
+.data
