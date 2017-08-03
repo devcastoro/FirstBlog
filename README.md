@@ -1,6 +1,6 @@
 # FirstBlog
 
-##Setup
+## Setup
 
 - Put the `.data` folder inside the root of the project (somebody probably has it)
 - Run `docker-compose up -d`
