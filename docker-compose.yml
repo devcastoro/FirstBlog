@@ -1,25 +1,25 @@
-
 version: '2'
+
 services:
- 
-  slim-example:
+
+  slim:
     image: comicrelief/php7-slim:latest
     volumes:
-      - ~/FirstBlog:/var/www/html
+      - .:/var/www/html
     ports:
       - "9001:80"
     depends_on:
-      - slim-example-mysql
+      - mysql
     environment:
       APPLICATION_ENV: local
- 
-  slim-example-mysql:
-    image: mysql:5
+
+  mysql:
+    image: mysql:5.7.17
     volumes:
-      - ~/FirstBlog/.data:/var/lib/mysql
+      - ./.data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: pwd
       MYSQL_DATABASE: firstblog
-   
+
